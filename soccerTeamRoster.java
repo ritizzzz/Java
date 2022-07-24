@@ -2,8 +2,14 @@ import java.util.Scanner;
 import playerPack.player;
 
 public class soccerTeamRoster{
+
+    static Scanner scnr = new Scanner(System.in);  
     public static void main(String []args){
         displayPlayers(initialInput());
+        while(menuOptions() != 'q'){
+           
+            
+        }
     }
 
     public static void displayPlayers(player[] allPlayers){
@@ -14,8 +20,7 @@ public class soccerTeamRoster{
         }
     }
 
-    public static player[] initialInput(){
-        Scanner scnr = new Scanner(System.in);  
+    public static player[] initialInput(){  
         player[] allPlayers = new player[5];
 
         for(int i = 0; i<5; i++){
@@ -32,7 +37,20 @@ public class soccerTeamRoster{
             System.out.println();
         }
 
-        scnr.close();
         return allPlayers;
     }
+
+    public static char menuOptions(){
+
+        System.out.println();
+        System.out.println("MENU");
+        System.out.println("u - Update player rating");
+        System.out.println("a - Output players above a rating");
+        System.out.println("r - Replace player");
+        System.out.println("o - Output roster");
+        System.out.println("q - Quit");
+        char choosenOption = scnr.next().charAt(0);
+        return choosenOption;
+    }
+
 }
