@@ -3,6 +3,18 @@ import playerPack.player;
 
 public class soccerTeamRoster{
     public static void main(String []args){
+        displayPlayers(initialInput());
+    }
+
+    public static void displayPlayers(player[] allPlayers){
+        System.out.println();  
+        System.out.println("ROSTER");
+        for(int i = 0; i < allPlayers.length; i++){
+            System.out.printf("Player: %d -- Jersey number: %d, Rating %d\n", i+1,  allPlayers[i].jerseyNumber, allPlayers[i].rating);
+        }
+    }
+
+    public static player[] initialInput(){
         Scanner scnr = new Scanner(System.in);  
         player[] allPlayers = new player[5];
 
@@ -17,15 +29,10 @@ public class soccerTeamRoster{
             ovPlayer.rating = rating;
 
             allPlayers[i] = ovPlayer;
-            System.out.println(allPlayers[i]);
-        }
-        System.out.println();
-        
-        System.out.println("ROSTER");
-        for(int i = 0; i < allPlayers.length; i++){
-            System.out.printf("Player: %d -- Jersey number: %d, Rating %d\n", i,  allPlayers[i].jerseyNumber, allPlayers[i].rating);
+            System.out.println();
         }
 
         scnr.close();
+        return allPlayers;
     }
 }
