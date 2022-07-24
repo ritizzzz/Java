@@ -3,12 +3,24 @@ import playerPack.player;
 
 public class soccerTeamRoster{
 
-    static Scanner scnr = new Scanner(System.in);  
+    static Scanner scnr = new Scanner(System.in); 
+    static player[] allPlayer; 
     public static void main(String []args){
         displayPlayers(initialInput());
-        while(menuOptions() != 'q'){
-           
-            
+
+        char option = menuOptions();
+        while(option != 'q'){
+
+            if(option == 'o'){
+                displayPlayers(allPlayer);
+            }
+            if(option == 'u'){
+                update();
+                displayPlayers(allPlayer);
+            }
+
+            option = menuOptions();
+
         }
     }
 
@@ -36,7 +48,7 @@ public class soccerTeamRoster{
             allPlayers[i] = ovPlayer;
             System.out.println();
         }
-
+        allPlayer = allPlayers;
         return allPlayers;
     }
 
@@ -51,6 +63,14 @@ public class soccerTeamRoster{
         System.out.println("q - Quit");
         char choosenOption = scnr.next().charAt(0);
         return choosenOption;
+    }
+
+    public static void update(){
+        System.out.println("Enter a jersey number:");
+        int jerseyNumber = scnr.nextInt();
+        System.out.println("Enter a new rating for player:");
+        int rating = scnr.nextInt();
+        allPlayer = player.changeRating(allPlayer, jerseyNumber, rating);
     }
 
 }
