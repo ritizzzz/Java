@@ -4,29 +4,35 @@ import playerPack.player;
 public class soccerTeamRoster{
 
     static Scanner scnr = new Scanner(System.in); 
-    static player[] allPlayer; 
+    static player[] allPlayer;
     public static void main(String []args){
-        displayPlayers(initialInput());
+        displayPlayers(initialInput(), "ROSTER");
 
         char option = menuOptions();
         while(option != 'q'){
 
             if(option == 'o'){
-                displayPlayers(allPlayer);
+                displayPlayers(allPlayer, "ROSTER");
             }
             if(option == 'u'){
                 update();
-                displayPlayers(allPlayer);
+                displayPlayers(allPlayer, "ROSTER");
             }
-
+            if(option == 'r'){
+                replace();
+                displayPlayers(allPlayer, "ROSTER");
+            }
+            if(option == 'a'){
+                aboveCertainRating();
+            }
             option = menuOptions();
 
         }
     }
 
-    public static void displayPlayers(player[] allPlayers){
+    public static void displayPlayers(player[] allPlayers, String displayText){
         System.out.println();  
-        System.out.println("ROSTER");
+        System.out.println(displayText);
         for(int i = 0; i < allPlayers.length; i++){
             System.out.printf("Player: %d -- Jersey number: %d, Rating %d\n", i+1,  allPlayers[i].jerseyNumber, allPlayers[i].rating);
         }
@@ -73,4 +79,34 @@ public class soccerTeamRoster{
         allPlayer = player.changeRating(allPlayer, jerseyNumber, rating);
     }
 
+    public static void replace(){
+        System.out.println("Enter a jersey number:");
+        int jerseyNumber = scnr.nextInt();
+        System.out.println("Enter a new jersey number:");
+        int newJerseyNumber = scnr.nextInt();
+        System.out.println("Enter a new jersey number:");
+        int rating = scnr.nextInt();
+        allPlayer = player.replace(allPlayer, jerseyNumber, newJerseyNumber, rating);
+    }
+
+   public static void aboveCertainRating(){
+        System.out.println("Enter a rating");
+        int rating = scnr.nextInt();
+        int index = 0;
+        for(int i = 0; i<allPlayer.length; i++){
+            if(allPlayer[i].rating > rating){
+                index++;
+            }
+        }
+        player[] allPlayerAbove = new player[index];
+
+        int otherIndex = 0;
+        for(int i = 0; i<allPlayer.length; i++){
+            if(allPlayer[i].rating > rating){
+                allPlayerAbove[otherIndex] = allPlayer[i];
+                otherIndex++;
+            }
+        }
+        displayPlayers(allPlayerAbove, "Above" + " " + rating);
+   } 
 }

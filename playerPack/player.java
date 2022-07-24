@@ -11,5 +11,14 @@ public class player{
         }
         return playerArray;
     }
+    public static player[] replace(player[] playerArray,  int jerseyNumber, int newJerseyNumber,int rating){
+        for(int i = 0; i < playerArray.length; i++){
+            if(playerArray[i].jerseyNumber == jerseyNumber){
+                playerArray[i].rating = rating;
+                playerArray[i].jerseyNumber = newJerseyNumber;
+            }
+        }
+        return playerArray;
+    }
 
 }
